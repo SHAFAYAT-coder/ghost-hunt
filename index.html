@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Hunt</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+</head>
+<body>
+
+<!-- MAIN MENU -->
+<div id="menu" class="screen">
+  <h1>👻 GHOST HUNT</h1>
+  <p class="tag">Investigate the house. Find the evidence. Banish the ghost.</p>
+  <div class="panel">
+    <label>Your name</label>
+    <input id="playerName" maxlength="14" placeholder="Hunter">
+
+    <button id="btnCreate">➕ Create Room</button>
+    <div id="createOpts" hidden>
+      <label>Room name</label>
+      <input id="roomName" maxlength="24" placeholder="Haunted House">
+      <label class="check">
+        <input type="checkbox" id="isPrivate"> Private (hidden from the list, join by code)
+      </label>
+      <button id="btnCreateGo">Create</button>
+    </div>
+
+    <label>Join with a room code</label>
+    <div class="row">
+      <input id="joinCode" maxlength="5" placeholder="ABCDE">
+      <button id="btnJoin">Join</button>
+    </div>
+
+    <h3>Public rooms <button id="btnRefresh" class="small">Refresh</button></h3>
+    <div id="roomList" class="list"></div>
+    <p id="menuError" class="error"></p>
+  </div>
+</div>
+
+<!-- LOBBY -->
+<div id="lobby" class="screen" hidden>
+  <div class="panel">
+    <h2>Room <span id="lobbyCode"></span></h2>
+    <p id="lobbyName" class="help"></p>
+    <h3>Hunters</h3>
+    <ul id="playerList"></ul>
+    <button id="btnStart">▶ Start Hunt</button>
+    <button id="btnLeave" class="secondary">Leave</button>
+    <p id="lobbyHint" class="help"></p>
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="game" hidden>
+  <div id="hud">
+    <div class="stat"><span class="label">Room</span><b id="hudCode">-----</b></div>
+    <div class="stat"><span class="label">Sanity</span><div class="bar"><div id="sanityBar"></div></div></div>
+    <div class="stat"><span class="label">Evidence</span><b id="hudClues">0/3</b></div>
+    <div class="stat"><span class="label">Ghost</span><div class="bar ghost"><div id="ghostBar"></div></div></div>
+    <div class="help">Click the screen to look around · WASD move · Shift run · F flashlight · E interact</div>
+  </div>
+  <div id="crosshair">+</div>
+  <div id="msg"></div>
+  <div id="prompt"></div>
+
+  <div id="overlay" hidden>
+    <h2 id="overlayTitle"></h2>
+    <p id="overlayText"></p>
+    <button id="btnBackLobby">Back to lobby</button>
+    <button id="btnQuit" class="secondary">Leave room</button>
+  </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
